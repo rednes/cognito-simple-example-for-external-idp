@@ -1,0 +1,34 @@
+{
+  "name": "cognito-simple-example-for-external-idp",
+  "version": "1.0.0",
+  "description": "Cognito simple example with amplify for external idp.",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "aws-amplify": "^3.0.18"
+  },
+  "scripts": {
+    "cfn-delete": "aws cloudformation delete-stack --stack-name CognitoSimpleExample",
+    "cfn-deploy": "aws cloudformation deploy --template-file ./cloudformation/template.yaml --stack-name CognitoSimpleExample --capabilities CAPABILITY_IAM",
+    "cfn-describe": "aws cloudformation describe-stacks --query 'Stacks[0].[Outputs[].[OutputKey,OutputValue]]|[]' --output table --stack-name CognitoSimpleExample",
+    "cfn-valid": "aws cloudformation validate-template --template-body file://./cloudformation/template.yaml",
+    "cp-amplify": "cp ./node_modules/aws-amplify/dist/aws-amplify.min.js ./public/js/aws-amplify.min.js",
+    "reinstall": "rm -rf ./node_modules && npm i",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "rednes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rednes/cognito-simple-example-for-external-idp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rednes/cognito-simple-example-for-external-idp/issues"
+  },
+  "homepage": "https://github.com/rednes/cognito-simple-example-for-external-idp#readme"
+}

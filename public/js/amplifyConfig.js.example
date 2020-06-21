@@ -1,0 +1,20 @@
+let CognitoRegion = 'ap-northeast-1';
+let CognitoUserPool = 'ap-northeast-1_XXXXXXXX';
+let CognitoUserPoolClient = 'dummy';
+
+let CognitoDomainPrefix = 'dummy';
+
+let amplifyConfig = {
+    Auth: {
+        region: CognitoRegion,
+        userPoolId: CognitoUserPool,
+        userPoolWebClientId : CognitoUserPoolClient,
+        oauth: {
+            domain: `${CognitoDomainPrefix}.auth.${CognitoRegion}.amazoncognito.com`,
+            scope: ['openid'],
+            redirectSignIn: 'http://localhost:3000',
+            redirectSignOut: 'http://localhost:3000',
+            responseType: 'code'
+        }
+    }
+};

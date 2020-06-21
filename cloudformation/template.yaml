@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Cognito simple example with amplify for external idp.
+Resources:
+  CognitoUserPool:
+    Type: 'AWS::Cognito::UserPool'
+    Properties:
+      UserPoolName: 'CognitoSimpleExampleUsers'
+      AutoVerifiedAttributes:
+        - 'email'
+      UsernameAttributes:
+        - 'email'
+      Schema:
+        - AttributeDataType: 'String'
+          Name: email
+          Required: True
+  CognitoUserPoolClient:
+    Type: 'AWS::Cognito::UserPoolClient'
+    Properties:
+      ClientName: 'CognitoSimpleExample'
+      AllowedOAuthFlows:
+        - 'code'
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthScopes:
+        - 'openid'
+      CallbackURLs:
+        - 'http://localhost:3000'
+      GenerateSecret: false
+      DefaultRedirectURI: 'http://localhost:3000'
+      ExplicitAuthFlows:
+        - 'ALLOW_REFRESH_TOKEN_AUTH'
+      LogoutURLs:
+        - 'http://localhost:3000'
+      PreventUserExistenceErrors: ENABLED
+      SupportedIdentityProviders:
+        - 'COGNITO'
+      UserPoolId: !Ref CognitoUserPool
+      WriteAttributes:
+        - 'email'
+
+Outputs:
+  CognitoRegion:
+    Description: <Cognito Region>
+    Value: !Ref AWS::Region
+  CognitoUserPool:
+    Description: <Cognito User Pool>
+    Value: !Ref CognitoUserPool
+  CognitoUserPoolClient:
+    Description: <Cognito User Pool App>
+    Value: !Ref CognitoUserPoolClient
