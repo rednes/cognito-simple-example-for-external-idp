@@ -13,6 +13,7 @@ Resources:
         - AttributeDataType: 'String'
           Name: email
           Required: True
+          Mutable: True
   CognitoUserPoolClient:
     Type: 'AWS::Cognito::UserPoolClient'
     Properties:
